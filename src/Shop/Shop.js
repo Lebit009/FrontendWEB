@@ -1,12 +1,17 @@
 import { Component,state } from "react";
 import {Container, Row , Col} from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
-import {CardGroup} from 'react-bootstrap';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 class Shop extends Component{
     state = {
-        products : []
+        products : [],
+        config:{
+            headers:{
+                'authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        }
     }
     componentDidMount(){
         axios.get("http://localhost:90/product/getallVehicles")
@@ -24,7 +29,7 @@ class Shop extends Component{
 
     Deleteproduct(_id){
         console.log(_id)
-        axios.delete("http://localhost:90/product/delete/" + _id)
+        axios.delete("http://localhost:90/product/delete/" + _id.this.state.config)
         .then((response)=>{
             console.log(response)
         })
@@ -35,16 +40,11 @@ class Shop extends Component{
     render(){
         return(
             <Container fluid>
-                <Row>
-                    
+                <Row>  
                     {
                         this.state.products.map((product)=>{
                             return (
-                             
                             <Col lg={3}>
-                                
-                               
-                        
                                     <Card className="mb-2 mt-2">
                                         <Card.Img src="https://images-na.ssl-images-amazon.com/images/I/61%2ByDjbEBaL._AC_SX425_.jpg" />
                                         <Card.Body>
@@ -55,7 +55,7 @@ class Shop extends Component{
                                         </Card.Body>
                                         <Card.Footer>
                                         <button onClick={this.Deleteproduct.bind(this, product._id)} className="ButtonUI">Delete</button>
-                                        <button type="submit" className="ButtonUI"><a href="/update"  className="h">Update</a></button>
+                                        <button type="submit" className="ButtonUI"><Link to={"/update/"+ product.Id}>Update</Link></button>
                                         {/* <button type="submit" className="ButtonUI"><a href="/Booking"  className="h">Update</a></button> */}
                                         </Card.Footer>
                                     </Card>

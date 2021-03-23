@@ -1,23 +1,42 @@
-import{Component, state, changeHandler} from "react";
+import axios from 'axios';
+import React, {
+    Component,
+    state,
+    changeHandler,
+    submitData} from 'react';
 
-class Update extends Component{
+class AddProduct extends Component{
     state={
         productImage:"",
         productName:"",
         productDescription:"",
         productPrice:"",
         productRating:"",
-        id: this.props.match.params.id
+        config:{
+            headers:{
+                'authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        }
     }
     changeHandler = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
+    submitData=(e)=>{
+        e.preventDefault();
+        axios.post('http://localhost:90/product/insert', this,state)
+        .then((response)=>{
+            console.log(response)
+        })
+        .catch((err)=>{
+            console.log(err.response)
+        })
+    }
     render(){
         return(
-            <div className="update_container">
-            <form className="update">   
+            <div className="addproduct_container">
+            <form className="addproduct">   
                     <div className="form-group">
                         <input type="text" className="form-control" placeholder="productImage" name="productImage" value ={this.state.productImage}
                         onChange={this.changeHandler}/>
@@ -39,11 +58,11 @@ class Update extends Component{
                         onChange={this.changeHandler}/>
                     </div>
                    
-                    <button type="submit" className="ButtonUI" onClick={this.submitData}>Update</button>
+                    <button type="submit" className="ButtonUI" onClick={this.submitData}>Add Product</button>
             </form>
         </div>
         )
     }
 }
 
-export default Update;
+export default AddProduct;

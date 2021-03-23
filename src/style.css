@@ -85,23 +85,13 @@
 .myCardMain{
     padding-bottom: 30px;
 }
-/* .grid__item {
-    float: left;
-    padding-left: 30px;
-    width: 100%;
-} */
+
 
 .parallax{
     padding:0px;
     margin: 0px;
 }
-/* .Footer1{
-    color: white;
-    padding-left: 50px;
-}
-.fot{
-    background-color: black;
-} */
+
 .main__img
 {
     overflow: hidden;
@@ -161,11 +151,26 @@
     border: 1px solid lightgray;
     padding: 20px;
     }
+.addproduct{
+    width: 500px;
+    height: fit-content;
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    flex-direction:column ;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    padding: 20px;
+}
 .footer{
     background-color: rgb(41, 40, 40);
     overflow: hidden;
     color: white;
     }
+    .addproduct_container{
+        align-items: center;
+        flex-direction: column;
+        display: flex;}  
 .update_container{
     align-items: center;
     flex-direction: column;

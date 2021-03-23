@@ -24,6 +24,7 @@ class Login extends Component{
         axios.post("http://localhost:90/registration/login", newdata)
         .then((response)=>{
             console.log(response);
+            localStorage.setItem('token',response.data.token)
         })        
         .catch((err)=>{
             console.log(err.response)

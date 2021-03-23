@@ -6,6 +6,7 @@ import Update from '../Update/Update'
 import Login from './Login';
 import Home from './home';
 import Shop from '../Shop/Shop';
+import AddProduct from './AddProduct';
 
 class Body extends Component{
     render(){
@@ -16,7 +17,8 @@ class Body extends Component{
                 <Col><Route path='/shop' component={Shop}></Route></Col>
                 <Col><Route path='/register' component={Register} /></Col>
                 <Col><Route path='/login' component={Login} /></Col>
-                <Col><Route path='/update' component={Update} /></Col>
+                <Col><Route path='/update/:id' component={Update} /></Col>
+                <Col><Route path='/AddProduct' component={AddProduct} /></Col>
            </Container>
         )
     }
