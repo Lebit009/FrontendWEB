@@ -1,4 +1,5 @@
 import{Component, state, changeHandler} from "react";
+import axios from 'axios';
 
 class Update extends Component{
     state={
@@ -7,11 +8,27 @@ class Update extends Component{
         productDescription:"",
         productPrice:"",
         productRating:"",
-        id: this.props.match.params.id
+        id: this.props.match.params.id,
+        config:{
+            headers:{
+                'authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        }
     }
     changeHandler = (e) => {
         this.setState({
             [e.target.name]: e.target.value
+        })
+    }
+
+    submitData(_id){
+        console.log(_id)
+        axios.put("http://localhost:90/product/update" + _id,this.state.config)
+        .then((response)=>{
+            console.log(response)
+        })
+        .catch((err)=>{
+            console.log(err.response)
         })
     }
     render(){

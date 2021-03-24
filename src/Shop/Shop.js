@@ -1,4 +1,4 @@
-import { Component,state } from "react";
+import { Component,state,products } from "react";
 import {Container, Row , Col} from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
@@ -29,7 +29,7 @@ class Shop extends Component{
 
     Deleteproduct(_id){
         console.log(_id)
-        axios.delete("http://localhost:90/product/delete/" + _id.this.state.config)
+        axios.delete("http://localhost:90/product/delete/" + _id,this.state.config)
         .then((response)=>{
             console.log(response)
         })
@@ -49,13 +49,15 @@ class Shop extends Component{
                                         <Card.Img src="https://images-na.ssl-images-amazon.com/images/I/61%2ByDjbEBaL._AC_SX425_.jpg" />
                                         <Card.Body>
                                         <Card.Text>
-                                            This is a wider card with supporting text below as a natural lead-in to
-                                            additional content. This content is a little bit longer.
+                                        <p>Name: {product.productName}</p>
+                                        <p>Description: {product.productDescription}</p>
+                                        <p>Price: {product.productPrice}</p>
+                                        <p>Rating: {product.productRating}</p>
                                         </Card.Text>
                                         </Card.Body>
                                         <Card.Footer>
                                         <button onClick={this.Deleteproduct.bind(this, product._id)} className="ButtonUI">Delete</button>
-                                        <button type="submit" className="ButtonUI"><Link to={"/update/"+ product.Id}>Update</Link></button>
+                                        <button className="ButtonUI"><Link to={"/update/"+ product.Id}>Update</Link></button>
                                         {/* <button type="submit" className="ButtonUI"><a href="/Booking"  className="h">Update</a></button> */}
                                         </Card.Footer>
                                     </Card>
